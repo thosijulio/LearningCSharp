@@ -16,9 +16,23 @@ class HelloWorld
     long aLongNumber = 1009128321834309123;
     short aShortNumer = 12324;
 
-    Console.WriteLine("Hello, World!");
-    Console.WriteLine("a int number: " + aIntNumber + "\r\na short number: " + aShortNumer + "\r\na long number: " + aLongNumber);
-    Console.WriteLine("a double number: " + aDoubleNumber + "\r\na float number: " + aFloatNumber);
+    Console.WriteLine("Hello, World! Working with numbers:");
+    Console.WriteLine("int number: " + aIntNumber + "\r\nshort number: " + aShortNumer + "\r\nlong number: " + aLongNumber);
+    Console.WriteLine("double number: " + aDoubleNumber + "\r\nfloat number: " + aFloatNumber);
+
+    // para declarar um caracter, é necessário o uso da aspa simples. P/ string, aspas duplas. O char usa a tabela ASCII para realizar a conversao de valores int e operações numéricas.
+    // Uma string pode ser vazia. Um char precisa necessariamente possui um valor da tabela ASCII.
+    char aChar = (char)65;
+    // usar @ antes das aspas duplas caso queira utilizar o enter como quebra de linha.
+    string aString = @"a simples phrase
+with two lines.";
+
+    Console.WriteLine("char: " + aChar + "\r\nstring: " + aString);
+
+    ++aChar;
+    Console.WriteLine("incremented char: " + aChar);
+
+
     Console.ReadLine();
   }
 }
