@@ -8,9 +8,38 @@ namespace Clients
 {
     class Client
     {
-        public string name = "";
-        public string cpf = "";
-        public string occupation = "";
+        private string name = "";
+        private string cpf = "";
+        private string occupation = "";
+
+        public void SetName(string newName)
+        {
+            name = newName;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
         
+        public void SetCpf(string newCpf)
+        {
+            cpf = newCpf;
+        }
+
+        public string getCpf()
+        {
+            return cpf;
+        }
+        
+        public void SetOccupation(string newOccupation)
+        {
+            occupation = newOccupation;
+        }
+        
+        public string getOccupation()
+        {
+            return occupation;
+        }
     }
 }
