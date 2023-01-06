@@ -11,21 +11,21 @@
 Clients.Client bruno = new Clients.Client();
 Clients.Client lara = new Clients.Client();
 
-bruno.SetName("Bruno");
-bruno.SetCpf("123456789-10");
-bruno.SetOccupation("Analista");
+bruno.Name = "Bruno";
+bruno.Cpf = "123456789-10";
+bruno.Occupation = "Analista";
 
-lara.SetName("Lara");
-lara.SetCpf("456789123-10");
-lara.SetOccupation("Dev");
+lara.Name = "Lara";
+lara.Cpf = "456789123-10";
+lara.Occupation = "Desenvolvedora";
 
 // Criação de uma instância (obj) da classe CheckingAccount.
 Accounts.CheckingAccount brunoAccount = new Accounts.CheckingAccount();
 Accounts.CheckingAccount laraAccount = new Accounts.CheckingAccount();
 
 // Realizando a composição
-brunoAccount.SetOwner(bruno);
-laraAccount.SetOwner(lara);
+brunoAccount.Owner = bruno;
+laraAccount.Owner = lara;
 
 /*
     Comparação por valor e por referência.
@@ -43,11 +43,11 @@ laraAccount.SetOwner(lara);
 Accounts.CheckingAccount exampleDuplicateAccount = brunoAccount;
 
 // Acessando os campos públicos criados na classe com interpolação de string;
-Console.WriteLine($"Saldo da conta antes do deposito: R${brunoAccount.GetBalance()}");
+Console.WriteLine($"Saldo da conta antes do deposito: R${brunoAccount.Balance}");
 
 brunoAccount.Deposit(150.40);
 
-Console.WriteLine($"Saldo da conta do {brunoAccount.GetOwner()} após do deposito: R${brunoAccount.GetBalance()}");
+Console.WriteLine($"Saldo da conta do {brunoAccount.Owner} após do deposito: R${brunoAccount.Balance}");
 
 double valueToWithdraw = 50.69;
 double valueToTransfer = 67.90;
@@ -65,9 +65,9 @@ catch (System.Exception error)
 
 try
 {
-    Console.WriteLine($"Saldo na conta da {laraAccount.GetOwner().GetName()} antes da transferência: R${laraAccount.GetBalance()}. Saldo na conta do {brunoAccount.GetOwner().GetName()} antes da transferência: R${brunoAccount.GetBalance()}");
+    Console.WriteLine($"Saldo na conta da {laraAccount.Owner.Name} antes da transferência: R${laraAccount.Balance}. Saldo na conta do {brunoAccount.Owner.Name} antes da transferência: R${brunoAccount.Balance}");
     brunoAccount.Transfer(valueToTransfer, laraAccount);
-    Console.WriteLine($"Saldo na conta da {laraAccount.GetOwner().GetName()} após a transferência: R${laraAccount.GetBalance()}. Saldo na conta do {brunoAccount.GetOwner().GetName()} após a transferência: R${brunoAccount.GetBalance()}");
+    Console.WriteLine($"Saldo na conta da {laraAccount.Owner.Name} após a transferência: R${laraAccount.Balance}. Saldo na conta do {brunoAccount.Owner.Name} após a transferência: R${brunoAccount.Balance}");
 }
 catch (System.Exception error)
 {
@@ -75,4 +75,4 @@ catch (System.Exception error)
 }
 
 
-Console.WriteLine($"Saldo na conta após todas as operações: {brunoAccount.GetBalance()}");
+Console.WriteLine($"Saldo na conta após todas as operações: {brunoAccount.Balance}");
