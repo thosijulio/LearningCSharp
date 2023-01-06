@@ -1,8 +1,31 @@
-﻿using bytebank;
+﻿
+using bytebank;
+
+/*
+	Curso de C#: Orientação a objeto (Alura).
+	Neste curso, foi desenvolvido uma aplicação para o ByteBank, um banco digital fictício, sendo que o objetivo
+	dessa aplicação será o controle de contas correntes dos clientes desse banco.
+*/
+
+// Criação de uma instância da classe Usuário para realizar a composição com a classe CheckingAccount;
+Client bruno = new Client();
+Client lara = new Client();
+
+bruno.name = "Bruno";
+bruno.cpf = "123456789-10";
+bruno.occupation = "Analista";
+
+lara.name = "Lara";
+lara.cpf = "456789123-10";
+lara.occupation = "Desenvolvedora";
 
 // Criação de uma instância (obj) da classe CheckingAccount.
 CheckingAccount brunoAccount = new CheckingAccount();
 CheckingAccount laraAccount = new CheckingAccount();
+
+// Realizando a composição
+brunoAccount.owner = bruno;
+laraAccount.owner = lara;
 
 /*
     Comparação por valor e por referência.
@@ -23,8 +46,6 @@ CheckingAccount exampleDuplicateAccount = brunoAccount;
 Console.WriteLine($"Saldo da conta antes do deposito: R${brunoAccount.balance}");
 
 brunoAccount.Deposit(150.40);
-brunoAccount.owner = "Bruno";
-laraAccount.owner = "Lara";
 
 Console.WriteLine($"Saldo da conta do {brunoAccount.owner} após do deposito: R${brunoAccount.balance}");
 
@@ -44,9 +65,9 @@ catch (System.Exception error)
 
 try
 {
-    Console.WriteLine($"Saldo na conta da lara antes da transferência: R${laraAccount.balance}. Saldo na conta do Bruno antes da transferência: R${brunoAccount.balance}");
+    Console.WriteLine($"Saldo na conta da {laraAccount.owner.name} antes da transferência: R${laraAccount.balance}. Saldo na conta do {brunoAccount.owner.name} antes da transferência: R${brunoAccount.balance}");
     brunoAccount.Transfer(valueToTransfer, laraAccount);
-    Console.WriteLine($"Saldo na conta da lara após a transferência: R${laraAccount.balance}. Saldo na conta do Bruno após a transferência: R${brunoAccount.balance}");
+    Console.WriteLine($"Saldo na conta da {laraAccount.owner.name} após a transferência: R${laraAccount.balance}. Saldo na conta do {brunoAccount.owner.name} após a transferência: R${brunoAccount.balance}");
 }
 catch (System.Exception error)
 {

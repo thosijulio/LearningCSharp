@@ -1,10 +1,4 @@
-﻿/*
-	Curso de C#: Orientação a objeto (Alura).
-	Neste curso, foi desenvolvido uma aplicação para o ByteBank, um banco digital fictício, sendo que o objetivo
-	dessa aplicação será o controle de contas correntes dos clientes desse banco.
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +14,9 @@ namespace bytebank
 		// Também é possível definir um outro valor padrão.
 		public int agencyCode;
 		public string account = "0001";
-		public string owner = "";
+
+		// Dessa forma, o campo owner é uma referências para objetos do tipo Client.
+		public Client owner;
 		public double balance;
 
 		// Criação de métodos de classe;
