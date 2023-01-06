@@ -4,6 +4,18 @@
 CheckingAccount brunoAccount = new CheckingAccount();
 CheckingAccount laraAccount = new CheckingAccount();
 
+/*
+    Comparação por valor e por referência.
+        Comparação por valor:
+            Usado em tipos primitivos. Ex.: int 5 == int 6; "julio" == "Juliooo";
+        Comparação por referência:
+            Usado quando usamos o operador "new" para criar uma instancia de um tipo (classe).
+            Nesses casos, o resultado de uma comparação entre esses tipos só será verdadeiro quando:
+                As duas variáveis fizerem referência a mesma instancia (ex.: brunoAccount e exampleDuplicateAccount).
+                Do contrario (brunoAccount e laraAccount), por mais que todos os métodos e valores sejam exatamente iguais,
+                o resultado da comparação sempre resultará em false, pois as duas apontam referências diferentes na memória.
+*/
+
 // Todas as alterações feitas em brunoAccount serão feitas aqui, e vice versa, pois as referências apontam para o mesmo objeto.
 CheckingAccount exampleDuplicateAccount = brunoAccount;
 

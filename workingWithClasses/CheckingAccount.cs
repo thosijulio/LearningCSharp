@@ -15,10 +15,13 @@ namespace bytebank
 	class CheckingAccount
 	{
 		// Usar prefixo "_" para campos private ou internal.
-		public int agencyCode = 0;
-		public string account = "";
+		// Os campos, diferente das variáveis ou contantes, possuem um valor padrão dependendo do tipo deles. Para tipos numericos, o valor padrão é 0.
+		// Para string, o valor padrão é null, e para bool, o valor padrão é false.
+		// Também é possível definir um outro valor padrão.
+		public int agencyCode;
+		public string account = "0001";
 		public string owner = "";
-		public double balance = 0;
+		public double balance;
 
 		// Criação de métodos de classe;
 
