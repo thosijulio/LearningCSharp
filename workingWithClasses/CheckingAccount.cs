@@ -14,9 +14,44 @@ namespace bytebank
 {
 	class CheckingAccount
 	{
+		// Usar prefixo "_" para campos private ou internal.
 		public int agencyCode = 0;
 		public string account = "";
 		public string owner = "";
-		public double balance = 1200;
+		public double balance = 0;
+
+		// Criação de métodos de classe;
+
+		public void Deposit(double value)
+		{
+			// o this referencia a própria classe. Assim, é possível acessar seus próprios valores e métodos.
+			this.balance += value;
+		}
+
+		public void Withdraw(double value)
+		{
+			if (this.balance >= value)
+			{
+				this.balance -= value;
+			}
+			// Lançando um erro caso o valor de saque seja maior que o valor da carteira.
+			else
+			{
+				throw new Exception("Erro: Saldo insufiente para realizar o saque.");
+			}
+		}
+
+		public void Transfer(double value, CheckingAccount destinyAccount)
+		{
+			if (this.balance >= value)
+			{
+				this.Withdraw(value);
+				destinyAccount.Deposit(value);
+			}
+			else
+			{
+				throw new Exception("Erro: Saldo insuficiente para realizar a transferência.");
+			}
+		}
 	}
 }
