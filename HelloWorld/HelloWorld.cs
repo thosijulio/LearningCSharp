@@ -72,7 +72,7 @@ class HelloWorld
 		{
 			Console.WriteLine("FOR - index value is " + index);
 		}
-
+		// Outra estrutura parecida é a do...while. A diferença é que a do while é executada pelo menos uma vez, mesmo se a condição não for verdadeira.
 		while (number != 0)
 		{
 			Console.WriteLine("WHILE - number is " + number);
@@ -81,7 +81,7 @@ class HelloWorld
 	}
 
 	static void drawAChristmasTree(int startedNumber) {
-		Console.WriteLine("Drawing a christmas tree in console.");
+		Console.WriteLine("Drawing a christmas tree in console with base " + startedNumber + ".");
 		for (int index = 1; index <= startedNumber; index += 2)
 		{
 			int spaceInEachSide = (startedNumber - index) / 2;
@@ -96,12 +96,25 @@ class HelloWorld
 			Console.WriteLine();
 		}
 	}
+  
+	static int factorialChallenge(int number)
+	{
+		if (number == 0)
+		{
+			return 1;
+		}
+		else
+		{
+			return factorialChallenge(number - 1) * number;
+		}
+	}
 	static void Main(string[] args)
 	{
 		workingWithPrimitiveVariables();
 		workingWithFluxControl(5);
 		workingWithLoop(3);
-		drawAChristmasTree(10);
+		drawAChristmasTree(20);
+		Console.WriteLine(factorialChallenge(5));
 		Console.ReadLine();
 	}
 }
