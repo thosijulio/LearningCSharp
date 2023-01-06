@@ -1,15 +1,15 @@
-﻿
-using bytebank;
-
-/*
+﻿/*
 	Curso de C#: Orientação a objeto (Alura).
 	Neste curso, foi desenvolvido uma aplicação para o ByteBank, um banco digital fictício, sendo que o objetivo
 	dessa aplicação será o controle de contas correntes dos clientes desse banco.
 */
 
 // Criação de uma instância da classe Usuário para realizar a composição com a classe CheckingAccount;
-Client bruno = new Client();
-Client lara = new Client();
+// Ao invés de utilizar no começo do arquivo "use bytebank", optei por deixar explicito de onde está "vindo" cada classe.
+// Dessa maneira, o código fica um pouco mais extenso, porém mais fácil de compreender.
+
+Clients.Client bruno = new Clients.Client();
+Clients.Client lara = new Clients.Client();
 
 bruno.name = "Bruno";
 bruno.cpf = "123456789-10";
@@ -20,8 +20,8 @@ lara.cpf = "456789123-10";
 lara.occupation = "Desenvolvedora";
 
 // Criação de uma instância (obj) da classe CheckingAccount.
-CheckingAccount brunoAccount = new CheckingAccount();
-CheckingAccount laraAccount = new CheckingAccount();
+Accounts.CheckingAccount brunoAccount = new Accounts.CheckingAccount();
+Accounts.CheckingAccount laraAccount = new Accounts.CheckingAccount();
 
 // Realizando a composição
 brunoAccount.owner = bruno;
@@ -40,7 +40,7 @@ laraAccount.owner = lara;
 */
 
 // Todas as alterações feitas em brunoAccount serão feitas aqui, e vice versa, pois as referências apontam para o mesmo objeto.
-CheckingAccount exampleDuplicateAccount = brunoAccount;
+Accounts.CheckingAccount exampleDuplicateAccount = brunoAccount;
 
 // Acessando os campos públicos criados na classe com interpolação de string;
 Console.WriteLine($"Saldo da conta antes do deposito: R${brunoAccount.balance}");
