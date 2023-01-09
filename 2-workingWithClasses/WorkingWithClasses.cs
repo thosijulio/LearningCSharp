@@ -8,16 +8,8 @@
 // Ao invés de utilizar no começo do arquivo "use bytebank", optei por deixar explicito de onde está "vindo" cada classe.
 // Dessa maneira, o código fica um pouco mais extenso, porém mais fácil de compreender.
 
-Clients.Client bruno = new Clients.Client();
-Clients.Client lara = new Clients.Client();
-
-bruno.Name = "Bruno";
-bruno.Cpf = "123456789-10";
-bruno.Occupation = "Analista";
-
-lara.Name = "Lara";
-lara.Cpf = "456789123-10";
-lara.Occupation = "Desenvolvedora";
+Clients.Client bruno = new Clients.Client("123456789-10", "Bruno", "Analista");
+Clients.Client lara = new Clients.Client("456789123-10", "Lara", "Desenvolvedora");
 
 // Criação de uma instância (obj) da classe CheckingAccount.
 Accounts.CheckingAccount brunoAccount = new Accounts.CheckingAccount();
