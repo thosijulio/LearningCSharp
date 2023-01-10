@@ -6,9 +6,15 @@ namespace Utils
         static public double totalBonus { get; private set; }
 
         /*
-                        SOBRECARGA DE MÉTODOS / POLIMORFISMO
-            Recurso da POO em que um método (registerBonus) pode ter comportamentos
-            diferentes de acordo com o parâmetro recebido.
+                        SOBRECARGA DE MÉTODOS
+            Recurso da POO que permite implementar mais de 
+            um método com o mesmo nome em uma classe.
+            OBS.: Para a criação de métodos com o mesmo nome,
+            os parâmetros tem que ser necessariamente diferentes.
+
+                            POLIMORFISMO
+            Recurso da POO em que um método (registerBonus) pode ter
+            comportamentos diferentes de acordo com o parâmetro recebido.
         */
         public void registerBonus(Employees.Employee employee)
         {
