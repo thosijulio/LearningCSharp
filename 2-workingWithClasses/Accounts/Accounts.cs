@@ -2,6 +2,18 @@
 {
 	class CheckingAccount
 	{
+		/*
+			Quando uma propriedade é "static", ela passa a ser da classe, e não mais dos objetos criados a partir dela.
+			Para acessar metodos, propriedades ou campos estaticos, é necessario referenciar a classe, e não o objeto. Ex.:
+				CheckingAccount.CreatedAccountsAmount.
+		*/
+		public static int CreatedAccountsAmount { get; private set; }
+
+		// Método construtor da classe.
+		public CheckingAccount() {
+			// Para acessar uma propriedade static (da classe), não se usa o "this", pois o this faz referência a instancia criada a partir da classe.
+			++CreatedAccountsAmount;
+		}
 		// Usar prefixo "_" para campos private ou internal.
 		// Os campos, diferente das variáveis ou contantes, possuem um valor padrão dependendo do tipo deles. Para tipos numericos, o valor padrão é 0.
 		// Para string, o valor padrão é null, e para bool, o valor padrão é false.
@@ -15,6 +27,7 @@
 		public string Account {
 			get { return this._account; }
 		}
+
 
 		// Dessa forma, o campo owner é uma referências para objetos do tipo Client.
 		private Clients.Client _owner;

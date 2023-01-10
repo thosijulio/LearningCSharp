@@ -18,21 +18,21 @@ namespace Clients
         //Exemplo de propriedade:
         //  O acessor set é chamado quando algum valor é atribuido a propriedade.
         //  O Acessor get é chamado quando ao tentar receber o valor da propriedade.
-        private string Name {
+        public string Name {
             get { return this._name; }
-            set { this._name = value; }
+            private set { this._name = value; }
         }
         
         private string _cpf = "";
-        private string Cpf {
+        public string Cpf {
             get { return this._cpf; }
-            set { this._cpf = value; }
+            private set { this._cpf = value; }
         }
         
         // Exemplo de uma propriedade autoimplementada.
         //  Torna a declaração amis concisa quando nenhum lógica adicional é necessária nos acessadores de propriedade.
         // Para ler mais sobre, acesse: https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/auto-implemented-properties
-        private string Occupation { get; set; } = "";
+        public string Occupation { get; private set; } = "";
 
         // Método construtor de uma classe em C#. É um método com o nome da própria classe, em que é possível passar como parâmetro valores que podem ser usados
         // para definir campos logo quando a classe é instanciada. Seus valores se tornam obrigatórios.
