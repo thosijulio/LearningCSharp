@@ -1,7 +1,8 @@
 namespace Employees
 {
-    public class Employee {
-        public Employee(string name, string cpf, double salary)
+    public class Director
+    {
+        public Director(string name, string cpf, double salary)
         {
             this.Name = name;
             this.Cpf = cpf;
@@ -14,7 +15,7 @@ namespace Employees
 
         public double getBonus()
         {
-            return Salary * 0.20;
+            return Salary * 1;
         }
     }
 }
