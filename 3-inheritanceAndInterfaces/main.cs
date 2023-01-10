@@ -10,4 +10,4 @@ Console.WriteLine(ana.Salary);
 bonusManager.registerBonus(pedro);
 bonusManager.registerBonus(ana);
 
-Console.WriteLine("Total de bônus concedido: " + Utils.BonusManager.totalBonus);
+Console.WriteLine("Total de bônus concedido: " + Utils.BonusManager.TotalBonus);

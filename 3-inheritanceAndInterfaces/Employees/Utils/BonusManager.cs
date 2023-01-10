@@ -3,7 +3,8 @@ namespace Utils
     public class BonusManager
     {
         // Propriedade estática que salva o total de bonificações já concedidas para cada funcionario;
-        static public double totalBonus { get; private set; }
+        // Ela é estática para seu valor permanecer igual sempre, independente de quantas instancias forem criadas.
+        static public double TotalBonus { get; private set; }
 
         /*
                         SOBRECARGA DE MÉTODOS
@@ -18,13 +19,13 @@ namespace Utils
         */
         public void registerBonus(Employees.Employee employee)
         {
-            totalBonus += employee.getBonus();
+            TotalBonus += employee.getBonus();
         }
 
         public void registerBonus(Employees.Director director)
         {
             Console.WriteLine("Outro comportamento quando um diretor for passado por parâmetro");
-            totalBonus += director.getBonus();
+            TotalBonus += director.getBonus();
         }
     }
 }
