@@ -28,7 +28,13 @@ namespace Employees
         public override double getBonus()
         {
             // Ainda sobre base, na linha abaixo estou chamando a função getBonus que foi susbtituida por essa atual
-            return base.getBonus() + this.Salary;
+            // return base.getBonus() + this.Salary;
+            return this.Salary * 0.5;
+        }
+
+        public override void raiseSalary()
+        {
+            this.Salary *= 1.15;
         }
     }
 }

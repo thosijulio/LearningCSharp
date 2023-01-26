@@ -17,15 +17,25 @@ namespace Utils
             Recurso da POO em que um método (registerBonus) pode ter
             comportamentos diferentes de acordo com o parâmetro recebido.
         */
-        public void registerBonus(Employees.Employee employee)
+        public void registerBonus(Employees.Manager manager)
         {
-            TotalBonus += employee.getBonus();
+            TotalBonus += manager.getBonus();
         }
 
         public void registerBonus(Employees.Director director)
         {
             Console.WriteLine("Outro comportamento quando um diretor for passado por parâmetro");
             TotalBonus += director.getBonus();
+        }
+
+        public void registerBonus(Employees.Assistant assistant)
+        {
+            TotalBonus += assistant.getBonus();
+        }
+
+        public void registerBonus(Employees.Designer designer)
+        {
+            TotalBonus += designer.getBonus();
         }
     }
 }
