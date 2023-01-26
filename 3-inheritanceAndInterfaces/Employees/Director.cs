@@ -19,14 +19,16 @@ namespace Employees
 
             Na linha abaixo, foi usado a palavra base para chamar o método construtor da classe pai para passar os parametros necessários
         */
-        public Director(string name, string cpf, double salary) : base(name, cpf, salary){}
+        public Director(string name, string cpf, double salary) : base(name, cpf, salary){
+            Console.WriteLine("Verificando ordem de execução - Método construtor da classe Director.");
+        }
 
         // O modificador "Override" é necessário para extender ou modificar um método asbtrato ou virtual que foi herdado da classe pai.
         // Source: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override
         public override double getBonus()
         {
             // Ainda sobre base, na linha abaixo estou chamando a função getBonus que foi susbtituida por essa atual
-            return base.getBonus() * 5;
+            return base.getBonus() + this.Salary;
         }
     }
 }

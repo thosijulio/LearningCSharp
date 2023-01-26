@@ -1,6 +1,6 @@
 ﻿
-Employees.Employee pedro = new Employees.Employee("Pedro", "45678912310", 2400.50);
-Employees.Director ana = new Employees.Director("Ana", "12345678910", 8000);
+Employees.Employee pedro = new Employees.Employee("Pedro", "45678912310", 2000);
+Employees.Director ana = new Employees.Director("Ana", "12345678910", 5000);
 
 Utils.BonusManager bonusManager = new Utils.BonusManager();
 
