@@ -8,6 +8,7 @@ namespace Employees
     */
     public class Director : Employees.Employee
     {
+        public string Password { get; set; } = "";
         /*
                     BASE
             Palavra reservada que é usada para acessar membros da classe base de dentro de uma classe derivada.
@@ -35,6 +36,11 @@ namespace Employees
         public override void raiseSalary()
         {
             this.Salary *= 1.15;
+        }
+
+        public bool Authenticate(string password)
+        {
+            return this.Password == password;
         }
     }
 }
