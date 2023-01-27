@@ -2,9 +2,9 @@ namespace InternalSystem
 {
     public class InternalSystem
     {
-        public bool Login(Authentication employee, string password)
+        public bool Login(IAuthentication user, string password)
         {
-            bool authenticated = employee.Authenticate(password);
+            bool authenticated = user.Authenticate(password);
 
             if (authenticated)
             {

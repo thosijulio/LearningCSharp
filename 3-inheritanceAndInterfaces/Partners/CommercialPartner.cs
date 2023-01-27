@@ -1,12 +1,12 @@
 namespace Partners
 {
-    public class CommercialPartner
+    public class CommercialPartner: InternalSystem.IAuthentication
     {
         public string Password { get; set; }
 
-        public bool Authenticate(string password)
+        public CommercialPartner(string password)
         {
-            return this.Password == password;
+            this.Password = password;
         }
     }
 }

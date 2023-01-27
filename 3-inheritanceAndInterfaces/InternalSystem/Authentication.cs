@@ -9,14 +9,21 @@ namespace InternalSystem
         O problema que fica é caso um usuário externo, que não seja employee, precisa usar o sistema e o método de autenticação.
         Ele necessáriamente será herdeiro de Employee, mesmo não sendo um Employee, devido a forma que o código foi escrito.
     */
-    public abstract class Authentication : Employees.Employee
+
+    /*
+        A solução para o problema acima é a criação de Interface.
+        Uma interface serve para definir um contrato. Qualquer classe que implemente
+        esse contrato obrigatoriamente precisa definir uma implementação dos membros definidos na interface.
+        A partir do c#11, uma interface pode definir membros virtuais para declarar um tipo de implementação deve fornecer os membros declarados.
+        Por convenção, utiliza-se o "I" no ínicio da interface para ficar fácil a vizualização dentro do código.
+    */
+    public interface IAuthentication
     {
-        public Authentication(string name, string cpf, double salary) : base(name, cpf, salary)
+        public string Password { get; set; }
+
+        public virtual bool Authenticate(string password)
         {
+            return this.Password == password;
         }
-
-        public string Password { get; set; } = "";
-
-        public abstract bool Authenticate(string password);
     }
 }

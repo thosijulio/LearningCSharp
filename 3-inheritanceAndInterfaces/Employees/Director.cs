@@ -6,8 +6,9 @@ namespace Employees
 
         No c#, para definir que uma classe herda outra, é necessário usar o operador de dois pontos seguido pela classe que será herdada.
     */
-    public class Director : InternalSystem.Authentication
+    public class Director : Employees.Employee, InternalSystem.IAuthentication
     {
+        public string Password { get; set; }
         /*
                     BASE
             Palavra reservada que é usada para acessar membros da classe base de dentro de uma classe derivada.
@@ -19,8 +20,10 @@ namespace Employees
 
             Na linha abaixo, foi usado a palavra base para chamar o método construtor da classe pai para passar os parametros necessários
         */
-        public Director(string name, string cpf, double salary) : base(name, cpf, salary){
+        public Director(string name, string cpf, double salary, string password) : base(name, cpf, salary)
+        {
             Console.WriteLine("Verificando ordem de execução - Método construtor da classe Director.");
+            this.Password = password;
         }
 
         // O modificador "Override" é necessário para extender ou modificar um método asbtrato ou virtual que foi herdado da classe pai.
@@ -35,11 +38,6 @@ namespace Employees
         public override void raiseSalary()
         {
             this.Salary *= 1.15;
-        }
-
-        public override bool Authenticate(string password)
-        {
-            return this.Password == password;
         }
     }
 }
