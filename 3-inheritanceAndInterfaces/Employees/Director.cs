@@ -6,9 +6,8 @@ namespace Employees
 
         No c#, para definir que uma classe herda outra, é necessário usar o operador de dois pontos seguido pela classe que será herdada.
     */
-    public class Director : Employees.Employee
+    public class Director : InternalSystem.Authentication
     {
-        public string Password { get; set; } = "";
         /*
                     BASE
             Palavra reservada que é usada para acessar membros da classe base de dentro de uma classe derivada.
@@ -38,7 +37,7 @@ namespace Employees
             this.Salary *= 1.15;
         }
 
-        public bool Authenticate(string password)
+        public override bool Authenticate(string password)
         {
             return this.Password == password;
         }

@@ -1,8 +1,7 @@
 namespace Employees
 {
-	public class Manager : Employees.Employee
+	public class Manager : InternalSystem.Authentication
 	{
-		public string Password { get; set; } = "";
 		public Manager(string name, string cpf, double salary) : base(name, cpf, salary){}
 
 		public override double getBonus()
@@ -15,7 +14,7 @@ namespace Employees
 			this.Salary *= 1.05;
 		}
 
-		public bool Authenticate(string password)
+		public override bool Authenticate(string password)
         {
             return this.Password == password;
         }

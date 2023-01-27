@@ -26,9 +26,20 @@
     Console.WriteLine("Total de Funcionários registrados: " + Employees.Employee.totalEmployees);
 }
 
+/* 
+    Da forma que o código foi escrito no último commit (5819d4b5795aeaf0a094e7824cbb968307942475), qualquer tipo de usuário consegue
+    realizar a autenticação, foi o método de Login da class InternalSytem chama o método authenticate, que está na classe employee.
+    Para corrigir isso, a solução encontrada de acordo com o conteúdo utilizado até o momento, foi criar uma classe intermediária entre
+    Employees.Employee > InternalSystem.Authentication > Employees.Director/Employees.Manager. Dessa forma, apenas os usuário com essas classes
+    tem acesso ao método de autenticação.
+    O problema disso é que a classe Authentication precisa criar os métodos obrigatórios definidos em employees, além de ter que passar os atributos necessários
+    no método construtor. Além de não fazer muito sentido semântido a class Director ser herdeira de Authentication.
+ */
 void UseSystem()
 {
     InternalSystem.InternalSystem system = new InternalSystem.InternalSystem();
+
+    Employees.Assistant roberto = new Employees.Assistant("Roberto", "123455", 2000);
 
     Employees.Director ingrid = new Employees.Director("Ingrid", "12345679", 5000);
     ingrid.Password = "123456";
@@ -38,6 +49,8 @@ void UseSystem()
 
     system.Login(ingrid, "123456");
     system.Login(julio, "12");
+    // system.Login(roberto, "12334"); => Esse código gera um erro "cannot convert from 'Employees.Assistant' to 'InternalSystem.Authentication'", pois
+    //  Assistant não herde a classe Authentication, logo, não consegue realizar o login.
 }
 
 UseSystem();

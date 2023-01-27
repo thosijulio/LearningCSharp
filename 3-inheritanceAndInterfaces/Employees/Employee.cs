@@ -19,6 +19,7 @@ namespace Employees
         uma mesma classe e cada um deles vai se diferenciar de acordo com sua assinatura (conjunto tipo de retorno e listagem de parâmetros que recebe).
         */
         #endregion
+
         public Employee(string name, string cpf, double salary)
         {
             Console.WriteLine("Verificando ordem de execução - Método construtor da classe Employee.");
