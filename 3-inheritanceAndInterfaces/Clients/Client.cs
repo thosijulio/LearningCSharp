@@ -16,6 +16,9 @@ namespace Clients
         }
 
         // No c#, toda classe herda indiretamente a classe Object, então é possível sobrescrever seus métodos virtuais (ToString, Equals, GetHashCode, etc);
-        public override 
+        public override string ToString()
+        {
+            return $"{this.Cpf}, {this.Email}, {this.Password}";
+        }
     }
 }
