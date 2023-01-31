@@ -2,7 +2,7 @@
 
 void TestCheckingAccountList()
 {
-    bytebank.Utils.CheckingAccountList accountsList = new bytebank.Utils.CheckingAccountList();
+    bytebank.Models.Administrative.Utils.CheckingAccountList accountsList = new bytebank.Models.Administrative.Utils.CheckingAccountList();
     
     accountsList.AddAccount(new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", new bytebank.Models.Account.Client("159762438-10", "Lilian Souza", "Cozinheira"), "6635-X", 583.25));
     accountsList.AddAccount(new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", new bytebank.Models.Account.Client("159762438-10", "Clovis Machonici", "Ator"), "6635-X", 16.48));

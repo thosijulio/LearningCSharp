@@ -1,4 +1,4 @@
-namespace bytebank.Utils
+namespace bytebank.Models.Administrative.Utils
 {
     public class CheckingAccountList
     {
