@@ -123,7 +123,7 @@ namespace bytebank.Models.Administrative.Utils
         {
             get
             {
-                Console.WriteLine("Acessando a C/C por classe indexável");
+                Console.WriteLine("Acessando a C/C por classe indexável.");
                 return _itens[index];
             }
             private set

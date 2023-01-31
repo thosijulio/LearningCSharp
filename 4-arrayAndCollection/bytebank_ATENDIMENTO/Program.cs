@@ -1,5 +1,6 @@
 ﻿Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
+#region Exercícios com Array e indexadores de classe C#
 void TestCheckingAccountList()
 {
     bytebank.Models.Administrative.Utils.CheckingAccountList accountsList = new bytebank.Models.Administrative.Utils.CheckingAccountList();
@@ -32,5 +33,120 @@ void TestCheckingAccountList()
 
     Console.WriteLine(accountsList[1]);
 }
+# endregion
 
-TestCheckingAccountList();
+
+/*
+    ArrayList biblioteca de System.Collections que provê métodos para manuseio de um vetor.
+
+    Vantagens:
+    O tamanho do array é dinamico, nao sendo necessário criar uma classe para aumentar e inserir valores ao fim do array, como no exemplo anterior
+    Desvantagens:
+    Seu uso é depreciado por questões performáticas. A microsoft recomenda utilizar List<T>.
+*/
+System.Collections.ArrayList _accountList = new System.Collections.ArrayList();
+
+void RegisterAccount()
+{
+    Console.Clear();
+    Console.WriteLine("======================================================\n");
+    Console.WriteLine("                  ------------------                  ");
+    Console.WriteLine("=====             Cadastro de Contas             =====");
+    Console.WriteLine("                  ------------------                  ");
+    Console.WriteLine("\n=====  Informe os dados para criação de conta:  =====\n");
+
+    try
+    {
+        Console.Write("CPF do cliente: ");
+        string ownerCpf = Console.ReadLine();
+        Console.Write("Nome do cliente: ");
+        string ownerName = Console.ReadLine();
+        Console.Write("Profissão do cliente: ");
+        string ownerOccupation = Console.ReadLine();
+
+        bytebank.Models.Account.Client client = new bytebank.Models.Account.Client(ownerCpf, ownerName, ownerOccupation);
+
+        Console.Write("Nome da agência: ");
+        string agencyName = Console.ReadLine();
+        Console.Write("Número da agência: ");
+        string accountCode = Console.ReadLine();
+        Console.Write("Número da conta: ");
+        int agencyCode = int.Parse(Console.ReadLine());
+        Console.Write("Saldo inicial na conta: ");
+        double balance = double.Parse(Console.ReadLine());
+        
+        bytebank.Models.Account.CheckingAccount account = new bytebank.Models.Account.CheckingAccount(agencyCode, agencyName, client, accountCode, balance);
+
+        _accountList.Add(account);
+        Console.WriteLine("             ----------------------------             ");
+        Console.WriteLine("             Conta cadastrada com sucesso             ");
+        Console.WriteLine("             ----------------------------             ");
+    }
+    catch (System.Exception)
+    {
+        Console.WriteLine("\nERRO: Dados inválidos. Tente novamente.");
+    }
+}
+
+void CustomerService()
+{
+    char option = '0';
+    while (option != '6')
+    {
+        Console.Clear();
+        Console.WriteLine("======================================================\n");
+        Console.WriteLine("                ----------------------                ");
+        Console.WriteLine("=====           Central de Atendimento           =====");
+        Console.WriteLine("                ----------------------                ");
+        Console.WriteLine("\n=====     Digite o número da opção desejada:     =====");
+        Console.WriteLine("=====             1: Cadastrar conta             =====");
+        Console.WriteLine("=====              2: Listar contas              =====");
+        Console.WriteLine("=====        3: Remover conta pelo índice        =====");
+        Console.WriteLine("=====              4: Ordenar conta              =====");
+        Console.WriteLine("=====             5: Pesquisar conta             =====");
+        Console.WriteLine("=====            6: Sair da aplicação            =====");
+        Console.WriteLine("\n======================================================\n\n");
+        Console.Write("Opção: ");
+
+        char selectedOption = Console.ReadLine()[0];
+
+        if (char.IsNumber(selectedOption))
+        {
+            option = selectedOption;
+        } else
+        {
+            Console.WriteLine("=======    Opção inválida. Tente novamente.    =======");
+        }
+
+        switch (option)
+        {
+            case '1':
+                RegisterAccount();
+                break;
+            case '2':
+                break;
+            case '3':
+                break;
+            case '4':
+                break;
+            case '5':
+                break;
+            case '6':
+                return;
+            default:
+                Console.WriteLine("Opção não implementada.");
+                break;
+        }
+
+
+        Console.WriteLine("\nPressione X para fechar a aplicação ou qualquer outra tecla para continuar.");
+        Console.Write("Opção: ");
+        char exitOption = Console.ReadLine()[0];
+        if (exitOption == 'X') break;
+    }
+}
+
+CustomerService();
+Console.WriteLine("======================================================");
+Console.WriteLine("=====               Fim da sessão.               =====");
+Console.WriteLine("======================================================\n");
