@@ -23,7 +23,8 @@
 				if (value > 0)
 				{
 					_agencyCode = value;
-				} else
+				}
+				else
 				{
 					Console.WriteLine("Número da conta precisa ter ao menos três caracteres.");
 				}

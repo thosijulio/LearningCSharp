@@ -68,7 +68,8 @@ namespace bytebank.Models.Administrative.Utils
             if (_itens.Length == newItens.Length)
             {
                 Console.WriteLine("Conta não encontrada.");
-            } else
+            }
+            else
             {
                 Console.WriteLine("Conta removida com sucesso.");
                 _itens = newItens;
@@ -92,7 +93,8 @@ namespace bytebank.Models.Administrative.Utils
             if(index < 0 || index > _itens.Length)
             {
                 return _itens[index];
-            } else
+            }
+            else
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }

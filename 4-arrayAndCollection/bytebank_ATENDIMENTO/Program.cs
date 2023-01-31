@@ -88,11 +88,27 @@ void RegisterAccount()
     }
 }
 
+void ShowAccounts()
+{
+    if (_accountList.Count <= 0)
+    {
+        Console.WriteLine("Nenhuma conta cadastrada.");
+    }
+    else
+    {
+        foreach(bytebank.Models.Account.CheckingAccount account in _accountList)
+        {
+            Console.WriteLine(account);
+        }
+    }
+}
+
 void CustomerService()
 {
     char option = '0';
     while (option != '6')
     {
+        #region Iteração inicial com o usuário via console
         Console.Clear();
         Console.WriteLine("======================================================\n");
         Console.WriteLine("                ----------------------                ");
@@ -107,13 +123,15 @@ void CustomerService()
         Console.WriteLine("=====            6: Sair da aplicação            =====");
         Console.WriteLine("\n======================================================\n\n");
         Console.Write("Opção: ");
-
+        
         char selectedOption = Console.ReadLine()[0];
+        #endregion
 
         if (char.IsNumber(selectedOption))
         {
             option = selectedOption;
-        } else
+        }
+        else
         {
             Console.WriteLine("=======    Opção inválida. Tente novamente.    =======");
         }
@@ -124,6 +142,7 @@ void CustomerService()
                 RegisterAccount();
                 break;
             case '2':
+                ShowAccounts();
                 break;
             case '3':
                 break;
