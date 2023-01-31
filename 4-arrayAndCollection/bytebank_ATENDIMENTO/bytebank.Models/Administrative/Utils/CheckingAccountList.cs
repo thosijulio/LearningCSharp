@@ -86,5 +86,50 @@ namespace bytebank.Models.Administrative.Utils
                 Console.WriteLine($"Índice = {index}. Nº da C/C: {account.AccountCode} - Nº da agência: {account.AgencyCode} - Nome do Cliente: {account.Owner.Name}");
             }
         }
+
+        public bytebank.Models.Account.CheckingAccount GetAccountByIndex(int index)
+        {
+            if(index < 0 || index > _itens.Length)
+            {
+                return _itens[index];
+            } else
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+        }
+
+        public int Size {
+            get
+            {
+                return _nextPosition;
+            }
+            
+        }
+
+        /*
+            ----- Indexadores -----
+            Permitem que intâncias de uma classe ou struct sejam indexados como matrizes. O valor indexado
+            pode ser definido ou recuperado sem especificar explicitamente um membro de instância ou tipo.
+
+            Visão geral:
+                . Os indexadores permitem que objetos sejam indexados de maneira semelhante às matrizes;
+                . Um acessador get retorna um valor. Um acessador set atribui um valor (semelhante as propriedades);
+                . A palavra-chave value é usada para definir o valor que está sendo atribuído pelo acessador set (semelhante as propriedades);
+                . Os indexadores não precisam ser indexados por um valor inteiro. Você deve definir o mecanismo de pesquisa específico no get;
+                . PODEM SER SOBRECARREGADOS (dependendo do argumento passado por parametro);
+                . Os indexadores podem ter mais de um parâmetro formal, por exemplo, ao acessar uma matriz bidimensional.
+        */
+        public bytebank.Models.Account.CheckingAccount this[int index]
+        {
+            get
+            {
+                Console.WriteLine("Acessando a C/C por classe indexável");
+                return _itens[index];
+            }
+            private set
+            {
+                _itens[index] = value;
+            }
+        }
     }
 }

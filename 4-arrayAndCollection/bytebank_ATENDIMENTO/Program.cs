@@ -29,6 +29,8 @@ void TestCheckingAccountList()
     accountsList.ShowAccounts();
     accountsList.AddAccount(carolinaAccount);
     accountsList.ShowAccounts();
+
+    Console.WriteLine(accountsList[1]);
 }
 
 TestCheckingAccountList();
