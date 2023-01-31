@@ -11,14 +11,14 @@ namespace bytebank.Models.Administrative.Utils
         public bytebank.Models.Account.CheckingAccount[] Itens { get { return _itens; } private set { _itens = value; } }
 
         // Construtor da classe que inicializa o array com o tamanho desejado.
-        public CheckingAccountList(int initialSize = 1)
+        public CheckingAccountList(int initialSize = 0)
         {
             _itens = new bytebank.Models.Account.CheckingAccount[initialSize];
-            ++ _nextPosition;
         }
 
         public void AddAccount(bytebank.Models.Account.CheckingAccount item)
         {
+            Console.WriteLine("AddAccount: Adicionando C/C na lista de contas armazenadas.");
             AddCapacityIfNecessary(_nextPosition + 1);
             _itens[_nextPosition] = item;
             ++ _nextPosition;
@@ -32,23 +32,59 @@ namespace bytebank.Models.Administrative.Utils
             }
         }
 
-        public bytebank.Models.Account.CheckingAccount getAccountWithGreaterBalance()
+        public bytebank.Models.Account.CheckingAccount GetAccountWithGreaterBalance()
         {   
+            Console.WriteLine("GetAccountWithGreaterBalance: Retornando a C/C com o maior saldo.");
             bytebank.Models.Account.CheckingAccount accountWithGreaterBalance = _itens[0];
             double greaterBalance = 0;
 
             foreach (bytebank.Models.Account.CheckingAccount account in _itens)
             {
-                if(account is bytebank.Models.Account.CheckingAccount)
+                if (account.Balance > greaterBalance)
                 {
-                    if (account.Balance > greaterBalance)
-                    {
-                        accountWithGreaterBalance = account;
-                        greaterBalance = account.Balance;
-                    }
+                    accountWithGreaterBalance = account;
+                    greaterBalance = account.Balance;
                 }
             }
             return accountWithGreaterBalance;
+        }
+
+        public void DeleteAccount(bytebank.Models.Account.CheckingAccount account)
+        {
+            Console.WriteLine("DeleteAccount: Removendo C/C passada por parâmetro.");
+            bytebank.Models.Account.CheckingAccount[] newItens = new bytebank.Models.Account.CheckingAccount[0];
+            int arraySize = 0;
+
+            for (int index = 0; index < _itens.Length; ++ index)
+            {
+                if (_itens[index] != account)
+                {
+                    if (arraySize <= newItens.Length) Array.Resize(ref newItens, arraySize + 1);
+                    newItens[arraySize] = _itens[index];
+                    ++ arraySize;
+                }
+            }
+
+            if (_itens.Length == newItens.Length)
+            {
+                Console.WriteLine("Conta não encontrada.");
+            } else
+            {
+                Console.WriteLine("Conta removida com sucesso.");
+                _itens = newItens;
+                -- _nextPosition;
+            }
+        }
+
+        public void ShowAccounts()
+        {   
+            Console.WriteLine("ShowAccounts: Exibindo lista de C/C armazenadas");
+            for (int index = 0; index < _itens.Length; ++ index)
+            {
+                bytebank.Models.Account.CheckingAccount account = _itens[index];
+
+                Console.WriteLine($"Índice = {index}. Nº da C/C: {account.AccountCode} - Nº da agência: {account.AgencyCode} - Nome do Cliente: {account.Owner.Name}");
+            }
         }
     }
 }
