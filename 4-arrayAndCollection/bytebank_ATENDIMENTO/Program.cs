@@ -157,6 +157,22 @@ CustomerService();
 
 
 #region Estudos da classe generica List<T>
+void findNameInListChallenge(List<string> list, string searchName)
+{
+    // Contains: Método que procura o valor passado por parametro na List instanciada e retorna um bool como resultado.
+    if (list.Contains(searchName))
+    {
+        Console.WriteLine($"O nome {searchName} existe na lista.");
+    }
+    else
+    {
+        Console.WriteLine($"O nome {searchName} não existe na lista.");
+    }
+}
+
+findNameInListChallenge(new List<string>{"Joao", "Maria", "Bruna"}, "Bruna");
+findNameInListChallenge(new List<string>{"Joao", "Maria", "Bruna"}, "Rodrigo");
+
 void genericListExamples()
 {
     List<bytebank.Models.Account.CheckingAccount> _accountList2 = new List<bytebank.Models.Account.CheckingAccount>()
