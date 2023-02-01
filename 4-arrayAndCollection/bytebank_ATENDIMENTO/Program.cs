@@ -1,50 +1,26 @@
-﻿Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
-
-#region Exercícios com Array e indexadores de classe C#
-void TestCheckingAccountList()
-{
-    bytebank.Models.Administrative.Utils.CheckingAccountList accountsList = new bytebank.Models.Administrative.Utils.CheckingAccountList();
-
-    bytebank.Models.Account.Client carolina = new bytebank.Models.Account.Client("345.694.233-50", "Carolina da Silva", "Desenvolvedora");
-    bytebank.Models.Account.CheckingAccount carolinaAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", carolina, "6635-X", 583.25);
-
-    bytebank.Models.Account.Client lilian = new bytebank.Models.Account.Client("345.694.233-50", "Lilian Souza", "Cozinheira");
-    bytebank.Models.Account.CheckingAccount lilianAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", lilian, "6635-X", 16.48);
-
-    bytebank.Models.Account.Client clovis = new bytebank.Models.Account.Client("345.694.233-50", "Clovis Machonici", "Taxista");
-    bytebank.Models.Account.CheckingAccount clovisAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", clovis, "6635-X", 1520.10);
-
-    bytebank.Models.Account.Client aline = new bytebank.Models.Account.Client("345.694.233-50", "Aline Moura", "Atriz");
-    bytebank.Models.Account.CheckingAccount alineAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", aline, "6635-X", 795.41);
-
-    accountsList.AddAccount(carolinaAccount);
-    accountsList.AddAccount(lilianAccount);
-    accountsList.AddAccount(clovisAccount);
-    accountsList.AddAccount(alineAccount);
-
-    Console.WriteLine(accountsList.GetAccountWithGreaterBalance());
-
-    accountsList.ShowAccounts();
-    accountsList.DeleteAccount(carolinaAccount);
-    accountsList.DeleteAccount(carolinaAccount);
-    accountsList.ShowAccounts();
-    accountsList.AddAccount(carolinaAccount);
-    accountsList.ShowAccounts();
-
-    Console.WriteLine(accountsList[1]);
-}
-# endregion
-
+﻿Console.Clear();
+Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.\n\n");
 
 /*
-    ArrayList biblioteca de System.Collections que provê métodos para manuseio de um vetor.
+    System.Collections.ArrayList _accountList = new System.Collections.ArrayList(); SUBSTITUIDO POR List<T>
+    ArrayList: classe do namespace System.Collections. Implementação evoluída de um array que provê métodos para manuseio de um vetor.
 
     Vantagens:
-    O tamanho do array é dinamico, nao sendo necessário criar uma classe para aumentar e inserir valores ao fim do array, como no exemplo anterior
+    O tamanho do array é dinamico, nao sendo necessário criar uma classe para aumentar e inserir valores ao fim do array, como no exemplo anterior.
+    A classe já disponibiliza operações de adição, inserção e exclusão de elementos.
     Desvantagens:
     Seu uso é depreciado por questões performáticas. A microsoft recomenda utilizar List<T>.
+
+    Uma característica importate é a possibilidade de se adicionar qualquer tipo de elemento, uma vez que ela trabalha com tipo da superclasse object de qual
+    todos os tipos do c# derivem
 */
-System.Collections.ArrayList _accountList = new System.Collections.ArrayList();
+
+/*
+    dessa nova forma, utilizando List<T>, nós conseguimos criar um array com os mesmos métodos que ArrayList possuia, porém obrigando cada item a ser do tipo declarado,
+    além de melhorar a performance.
+    List é uma classe generica, ou seja, quando vamos cria-la, podemos passar o tipo pra ela. Exemplo de criação de classe generica no fim desse arquivo.
+*/
+List<bytebank.Models.Account.CheckingAccount> _accountList = new List<bytebank.Models.Account.CheckingAccount>();
 
 void RegisterAccount()
 {
@@ -81,6 +57,7 @@ void RegisterAccount()
         Console.WriteLine("             ----------------------------             ");
         Console.WriteLine("             Conta cadastrada com sucesso             ");
         Console.WriteLine("             ----------------------------             ");
+        Console.WriteLine("======================================================\n");
     }
     catch (System.Exception)
     {
@@ -90,9 +67,15 @@ void RegisterAccount()
 
 void ShowAccounts()
 {
+    Console.Clear();
+    Console.WriteLine("======================================================\n");
+    Console.WriteLine("                  ------------------                  ");
+    Console.WriteLine("=====             Listagem de Contas             =====");
+    Console.WriteLine("                  ------------------                  ");
+
     if (_accountList.Count <= 0)
     {
-        Console.WriteLine("Nenhuma conta cadastrada.");
+        Console.WriteLine("\nNenhuma conta cadastrada.");
     }
     else
     {
@@ -109,7 +92,6 @@ void CustomerService()
     while (option != '6')
     {
         #region Iteração inicial com o usuário via console
-        Console.Clear();
         Console.WriteLine("======================================================\n");
         Console.WriteLine("                ----------------------                ");
         Console.WriteLine("=====           Central de Atendimento           =====");
@@ -161,11 +143,121 @@ void CustomerService()
         Console.WriteLine("\nPressione X para fechar a aplicação ou qualquer outra tecla para continuar.");
         Console.Write("Opção: ");
         char exitOption = Console.ReadLine()[0];
-        if (exitOption == 'X') break;
+        if (exitOption == 'X')
+        {
+            Console.WriteLine("======================================================");
+            Console.WriteLine("=====               Fim da sessão.               =====");
+            Console.WriteLine("======================================================\n");
+            break;
+        }
     }
 }
 
 CustomerService();
-Console.WriteLine("======================================================");
-Console.WriteLine("=====               Fim da sessão.               =====");
-Console.WriteLine("======================================================\n");
+
+
+#region Estudos da classe generica List<T>
+void genericListExamples()
+{
+    List<bytebank.Models.Account.CheckingAccount> _accountList2 = new List<bytebank.Models.Account.CheckingAccount>()
+    {
+        new bytebank.Models.Account.CheckingAccount(123, "Bytebank 1", new bytebank.Models.Account.Client("456", "Joao", "Dev"), "3211", 20),
+        new bytebank.Models.Account.CheckingAccount(231, "Bytebank 2", new bytebank.Models.Account.Client("563", "Pedro", "Zelador"), "2112", 50),
+        new bytebank.Models.Account.CheckingAccount(321, "Bytebank 3", new bytebank.Models.Account.Client("446", "Otavio", "Auxiliar"), "2312", 200.50),
+    };
+    List<bytebank.Models.Account.CheckingAccount> _accountList3 = new List<bytebank.Models.Account.CheckingAccount>()
+    {
+        new bytebank.Models.Account.CheckingAccount(14234, "Bytebank 4", new bytebank.Models.Account.Client("039578", "Anteteguemon", "Radialista"), "2571", 2198.46),
+        new bytebank.Models.Account.CheckingAccount(57346, "Bytebank 5", new bytebank.Models.Account.Client("204897", "Olaria", "Atleta"), "2938", 23.47),
+        new bytebank.Models.Account.CheckingAccount(21394, "Bytebank 6", new bytebank.Models.Account.Client("103954", "Maria", "Cozinheiro"), "9038", 1093.57),
+    };
+
+    // ADDLIST: método da classe List que adiciona ao fim do array os itens da lista passada por parametro.
+    _accountList2.AddRange(_accountList3);
+
+    // GETRANGE: método que retorna uma nova lista a partir da lista instanciada, com itens a partir do index passado como primeiro parametro, e a quantidade a partir dele passado no segundo.
+    List<bytebank.Models.Account.CheckingAccount> getRangeExample = _accountList3.GetRange(0, 1);
+
+    // REVERSE: método que inverte a ordem do List instanciada.
+    _accountList2.Reverse();
+
+    Console.WriteLine("GetRange example");
+    foreach (bytebank.Models.Account.CheckingAccount account in getRangeExample)
+    {
+        Console.WriteLine(account);
+    }
+    
+    Console.WriteLine("AddRange/Reverse Example");
+    foreach (bytebank.Models.Account.CheckingAccount account in _accountList2)
+    {
+        Console.WriteLine(account);
+    }
+}
+#endregion
+
+#region Exercícios com Array e indexadores de classe C#
+void TestCheckingAccountList()
+{
+    bytebank.Models.Administrative.Utils.CheckingAccountList accountsList = new bytebank.Models.Administrative.Utils.CheckingAccountList();
+
+    bytebank.Models.Account.Client carolina = new bytebank.Models.Account.Client("345.694.233-50", "Carolina da Silva", "Desenvolvedora");
+    bytebank.Models.Account.CheckingAccount carolinaAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", carolina, "6635-X", 583.25);
+
+    bytebank.Models.Account.Client lilian = new bytebank.Models.Account.Client("345.694.233-50", "Lilian Souza", "Cozinheira");
+    bytebank.Models.Account.CheckingAccount lilianAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", lilian, "6635-X", 16.48);
+
+    bytebank.Models.Account.Client clovis = new bytebank.Models.Account.Client("345.694.233-50", "Clovis Machonici", "Taxista");
+    bytebank.Models.Account.CheckingAccount clovisAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", clovis, "6635-X", 1520.10);
+
+    bytebank.Models.Account.Client aline = new bytebank.Models.Account.Client("345.694.233-50", "Aline Moura", "Atriz");
+    bytebank.Models.Account.CheckingAccount alineAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", aline, "6635-X", 795.41);
+
+    accountsList.AddAccount(carolinaAccount);
+    accountsList.AddAccount(lilianAccount);
+    accountsList.AddAccount(clovisAccount);
+    accountsList.AddAccount(alineAccount);
+
+    Console.WriteLine(accountsList.GetAccountWithGreaterBalance());
+
+    accountsList.ShowAccounts();
+    accountsList.DeleteAccount(carolinaAccount);
+    accountsList.DeleteAccount(carolinaAccount);
+    accountsList.ShowAccounts();
+    accountsList.AddAccount(carolinaAccount);
+    accountsList.ShowAccounts();
+
+    Console.WriteLine(accountsList[1]);
+}
+# endregion
+
+#region Estudo de classes Generics
+/*
+    GENERICS:
+        Recurso da linguagem C# que permite personalizar métodos, classes, interfaces e estruturas,
+        podendo diminuir código e maximizar o desempenho de uma aplicação, proporcionando uma segurança
+        de tipos.
+        Com generics, é possível deixar a definição do tipo para o momento que precisamos de determinado elemento no código,
+        ou seja, a classe ou método poderá trabalhar com qualquer tipo.
+*/
+
+void genericExamples()
+{
+    // Aqui o <T> foi substituido pelo tipo int
+    GenericExample<int> genericTest = new GenericExample<int>();
+    // Aqui o <T> foi substituido pelo tipo string
+    GenericExample<string> genericTest2 = new GenericExample<string>();
+
+    // As duas formas funcionando, com tipos diferentes, mas com o mesmo código.
+    genericTest.ShowValue(1540);
+    genericTest2.ShowValue("teste generic c#");
+}
+
+// <T> é a forma usada para definir que essa classe usará Generic. Ele é substituído na criação de um objeto da classe.
+public class GenericExample<T>
+{
+    public void ShowValue(T valueExample)
+    {
+        Console.WriteLine(valueExample);
+    }
+}
+#endregion Generics
