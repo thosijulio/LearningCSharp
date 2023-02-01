@@ -86,6 +86,45 @@ void ShowAccounts()
     }
 }
 
+void RemoveAccount()
+{
+    Console.Clear();
+    Console.WriteLine("======================================================\n");
+    Console.WriteLine("                  ------------------                  ");
+    Console.WriteLine("=====             Exclusão de contas             =====");
+    Console.WriteLine("                  ------------------                  ");
+    Console.WriteLine("\n=====  Informe os dados para criação de conta:  =====\n");
+
+    try
+    {
+        Console.Write("Digite o numero da conta a ser excluída: ");
+        string accountCode = Console.ReadLine();
+
+        bytebank.Models.Account.CheckingAccount accountToRemove = null;
+
+        foreach(bytebank.Models.Account.CheckingAccount account in _accountList)
+        {
+            if (account.AccountCode == accountCode) accountToRemove = account;
+        }
+        if (accountToRemove == null)
+        {
+            Console.WriteLine("Conta não existe na lista.");
+        }
+        else
+        {
+            Console.WriteLine(accountToRemove);
+            Console.WriteLine("              --------------------------              ");
+            Console.WriteLine("              Conta excluída com sucesso              ");
+            Console.WriteLine("              --------------------------              ");
+            Console.WriteLine("======================================================\n");
+        }
+    }
+    catch (System.Exception)
+    {
+        Console.WriteLine("\nERRO: Número inválidos. Tente novamente.");
+    }
+}
+
 void CustomerService()
 {
     char option = '0';
@@ -99,7 +138,7 @@ void CustomerService()
         Console.WriteLine("\n=====     Digite o número da opção desejada:     =====");
         Console.WriteLine("=====             1: Cadastrar conta             =====");
         Console.WriteLine("=====              2: Listar contas              =====");
-        Console.WriteLine("=====        3: Remover conta pelo índice        =====");
+        Console.WriteLine("=====              3: Remover conta              =====");
         Console.WriteLine("=====              4: Ordenar conta              =====");
         Console.WriteLine("=====             5: Pesquisar conta             =====");
         Console.WriteLine("=====            6: Sair da aplicação            =====");
@@ -127,6 +166,7 @@ void CustomerService()
                 ShowAccounts();
                 break;
             case '3':
+                RemoveAccount();
                 break;
             case '4':
                 break;
@@ -142,13 +182,20 @@ void CustomerService()
 
         Console.WriteLine("\nPressione X para fechar a aplicação ou qualquer outra tecla para continuar.");
         Console.Write("Opção: ");
-        char exitOption = Console.ReadLine()[0];
-        if (exitOption == 'X')
+        try
         {
-            Console.WriteLine("======================================================");
-            Console.WriteLine("=====               Fim da sessão.               =====");
-            Console.WriteLine("======================================================\n");
-            break;
+            char exitOption = Console.ReadLine()[0];
+            if (exitOption == 'X')
+            {
+                Console.WriteLine("======================================================");
+                Console.WriteLine("=====               Fim da sessão.               =====");
+                Console.WriteLine("======================================================\n");
+                break;
+            }   
+        }
+        catch (System.Exception)
+        {
+            return;
         }
     }
 }
@@ -170,8 +217,8 @@ void findNameInListChallenge(List<string> list, string searchName)
     }
 }
 
-findNameInListChallenge(new List<string>{"Joao", "Maria", "Bruna"}, "Bruna");
-findNameInListChallenge(new List<string>{"Joao", "Maria", "Bruna"}, "Rodrigo");
+// findNameInListChallenge(new List<string>{"Joao", "Maria", "Bruna"}, "Bruna");
+// findNameInListChallenge(new List<string>{"Joao", "Maria", "Bruna"}, "Rodrigo");
 
 void genericListExamples()
 {
@@ -196,6 +243,9 @@ void genericListExamples()
 
     // REVERSE: método que inverte a ordem do List instanciada.
     _accountList2.Reverse();
+
+    // CLEAR: método que remove todos os itens de uma List<>.
+    _accountList2.Clear();
 
     Console.WriteLine("GetRange example");
     foreach (bytebank.Models.Account.CheckingAccount account in getRangeExample)
