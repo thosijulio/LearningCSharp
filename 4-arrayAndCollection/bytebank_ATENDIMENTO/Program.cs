@@ -151,8 +151,23 @@ void SortAccounts()
     Console.WriteLine("======================================================\n");
 }
 
-bytebank.Models.Account.CheckingAccount SearchByCpf(string? cpf)
+bytebank.Models.Account.CheckingAccount SearchByCpf(string cpf)
 {
+    /*
+        LINQ
+        Linguagem p/ manipulação de dados lançada no .net 3.0, tem por objetivo possibilitar que os programas
+        desenvolvidos na plataforma .NET consigam selecionar dados a partir de origiens diversas desde array, xml ou banco.
+
+        Utilizável de duas formas:
+            Sixtaxe de consulta: muito similar as consultas SQL. Operação é dividida em três cláusulas:
+                FROM define a origem dos dados;
+                WHERE para aplicação dos filtros;
+                SELECT para a seleção dos dados.
+            Métodos LINQ: a maioria dos métodos são a partir de extensão de classes, que permite uma instrução mais concisa.
+            Exemplo:
+                List<string> names = List<string>{"Julio", "Bruno", "Eduardo"};
+                List<string> filteredName = names.Where(name => name == "Julio").FirstOrDefault();
+    */
     /*
 
     FORMA ANTIGA(SEM O WHERE): linhas a mais no código desnecessárias. Com o where reduzimos o código p/ apenas uma linha.
@@ -166,10 +181,10 @@ bytebank.Models.Account.CheckingAccount SearchByCpf(string? cpf)
     // Where: método de extensão da classe Linq, que permite criar uma consulta em uma lista, seja xml, banco, ou lista armazenada na RAM.
     // Método aceita uma função lambda que retorne true ou false para realizar a verificação, e retorna um array onde os valores foram verdadeiros.
     // FirstOrDefault: retorna apenas o primeiro valor de uma pesquisa.
-    return _accountList.Where(account => account.Owner.Cpf == cpf).FirstOrDefault();
+    return _accountList.Where(account => account.Owner.Cpf.Contains(cpf)).FirstOrDefault();
 }
 
-bytebank.Models.Account.CheckingAccount SearchByAccountCode(string? accountCode)
+bytebank.Models.Account.CheckingAccount SearchByAccountCode(string accountCode)
 {
     /*
     FORMA ANTIGA
@@ -179,7 +194,7 @@ bytebank.Models.Account.CheckingAccount SearchByAccountCode(string? accountCode)
     }
     */
 
-    return _accountList.Where(account => account.AccountCode == accountCode).FirstOrDefault();
+    return _accountList.Where(account => account.AccountCode.Contains(accountCode)).FirstOrDefault();
 }
 
 void SearchAccount()

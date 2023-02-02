@@ -132,7 +132,7 @@
 				int 0 = Intância ocorre na mesma posição que o parametro na ordem de comparação;
 				int > 0 = A instância segue o valor o parametro na ordem de comparação;
 		*/
-		public int CompareTo(CheckingAccount? comparisionAccount)
+		public int CompareTo(CheckingAccount comparisionAccount)
 		{
 			if (comparisionAccount == null)
 			{
