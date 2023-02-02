@@ -153,24 +153,33 @@ void SortAccounts()
 
 bytebank.Models.Account.CheckingAccount SearchByCpf(string? cpf)
 {
+    /*
+
+    FORMA ANTIGA(SEM O WHERE): linhas a mais no código desnecessárias. Com o where reduzimos o código p/ apenas uma linha.
     // Count: método da List<T> que retorna um int com o tamanho atual do array.
     for (int index = 0; index < _accountList.Count; ++ index)
     {
         // Equals: método da classe string que retorna true caso a string passada por parametro seja igual ao valor da instância, ou false caso qualquer outra coisa.
         if (_accountList[index].Owner.Cpf.Equals(cpf)) return _accountList[index];
     }
-
-    return null;
+    */
+    // Where: método de extensão da classe Linq, que permite criar uma consulta em uma lista, seja xml, banco, ou lista armazenada na RAM.
+    // Método aceita uma função lambda que retorne true ou false para realizar a verificação, e retorna um array onde os valores foram verdadeiros.
+    // FirstOrDefault: retorna apenas o primeiro valor de uma pesquisa.
+    return _accountList.Where(account => account.Owner.Cpf == cpf).FirstOrDefault();
 }
 
 bytebank.Models.Account.CheckingAccount SearchByAccountCode(string? accountCode)
 {
+    /*
+    FORMA ANTIGA
     for (int index = 0; index < _accountList.Count; ++ index)
     {
         if (_accountList[index].AccountCode.Equals(accountCode)) return _accountList[index];
     }
+    */
 
-    return null;
+    return _accountList.Where(account => account.AccountCode == accountCode).FirstOrDefault();
 }
 
 void SearchAccount()
@@ -183,47 +192,73 @@ void SearchAccount()
     Console.WriteLine("              Digite a opção desejada:                ");
     Console.WriteLine("              (1) p/ pesquisa por CPF;                ");
     Console.WriteLine("        (2) p/ pesquisa por NÚMERO DA CONTA.          ");
+    Console.WriteLine("(3) p/ pesquisa contas com o mesmo NÚMERO DE AGÊNCIA. ");
     try
     {
         Console.Write("\nOpção: ");
         int selectedOption = int.Parse(Console.ReadLine());
 
-            if (selectedOption == 1)
-            {
+        switch (selectedOption)
+        {
+            case 1:
                 Console.Write("Digite o CPF do titular: ");
                 string ownerCpfToSearch = Console.ReadLine();
 
-                bytebank.Models.Account.CheckingAccount account = SearchByCpf(ownerCpfToSearch);
+                bytebank.Models.Account.CheckingAccount accountFindByCpf = SearchByCpf(ownerCpfToSearch);
 
-                if (account != null)
+                if (accountFindByCpf != null)
                 {
                     Console.WriteLine("\nDados da conta encontrada: ");
-                    Console.WriteLine(account);
+                    Console.WriteLine(accountFindByCpf);
                     Console.WriteLine("======================================================\n");
                 }
                 else
                 {
                     Console.WriteLine("\nNenhuma conta encontrada.");
                 }
-            }
-            else if (selectedOption == 2)
-            {
+                break;
+
+            case 2:
                 Console.Write("Digite o número da conta desejada: ");
                 string accountCodeToSearch = Console.ReadLine();
 
-                bytebank.Models.Account.CheckingAccount account = SearchByAccountCode(accountCodeToSearch);
+                bytebank.Models.Account.CheckingAccount accountFindByAccountCode = SearchByAccountCode(accountCodeToSearch);
 
-                if (account != null)
+                if (accountFindByAccountCode != null)
                 {
                     Console.WriteLine("\nDados da conta encontrada: ");
-                    Console.WriteLine(account);
+                    Console.WriteLine(accountFindByAccountCode);
                     Console.WriteLine("======================================================\n");
                 }
                 else
                 {
                     Console.WriteLine("\nNenhuma conta encontrada.");
                 }
-            }
+                break;
+
+            case 3:
+                Console.Write("Digite o número da agência desejada: ");
+                int agengyCodeToSearch = int.Parse(Console.ReadLine());
+
+                // Outra forma de se criar uma query. Dessa forma, apenas a instrução fica armazenada na variavel..
+                List<bytebank.Models.Account.CheckingAccount> queryAccountsFoundedWithAgencyCode = (
+                    from account in _accountList
+                    where account.AgencyCode == agengyCodeToSearch
+                    select account).ToList();
+                if (queryAccountsFoundedWithAgencyCode.Count() <= 0)
+                {
+                    Console.WriteLine("\nNenhuma conta encontrada.");
+                    return;
+                }
+                foreach (bytebank.Models.Account.CheckingAccount account in queryAccountsFoundedWithAgencyCode)
+                {
+                    Console.WriteLine(account.ToString());
+                }
+                break;
+
+            default:
+                throw new Exception();
+        }
     }
     catch (System.Exception)
     {

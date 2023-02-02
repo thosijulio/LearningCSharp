@@ -117,6 +117,7 @@
 		{
 
 			return $" === DADOS DA CONTA === \n" +
+				   $"Número da Agência : {this.AgencyCode} \n" +
 				   $"Número da Conta : {this.AccountCode} \n" +
 				   $"Titular da Conta: {this.Owner.Name} \n" +
 				   $"CPF do Titular  : {this.Owner.Cpf} \n" +
