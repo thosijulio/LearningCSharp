@@ -20,7 +20,12 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.\n\n");
     além de melhorar a performance.
     List é uma classe generica, ou seja, quando vamos cria-la, podemos passar o tipo pra ela. Exemplo de criação de classe generica no fim desse arquivo.
 */
-List<bytebank.Models.Account.CheckingAccount> _accountList = new List<bytebank.Models.Account.CheckingAccount>();
+List<bytebank.Models.Account.CheckingAccount> _accountList = new List<bytebank.Models.Account.CheckingAccount>()
+{
+    new bytebank.Models.Account.CheckingAccount(123, "Bytebank 1", new bytebank.Models.Account.Client("456", "Joao", "Dev"), 20),
+    new bytebank.Models.Account.CheckingAccount(231, "Bytebank 2", new bytebank.Models.Account.Client("563", "Pedro", "Zelador"), 50),
+    new bytebank.Models.Account.CheckingAccount(321, "Bytebank 3", new bytebank.Models.Account.Client("446", "Otavio", "Auxiliar"), 200.50),
+};
 
 void RegisterAccount()
 {
@@ -45,13 +50,11 @@ void RegisterAccount()
         Console.Write("Nome da agência: ");
         string agencyName = Console.ReadLine();
         Console.Write("Número da agência: ");
-        string accountCode = Console.ReadLine();
-        Console.Write("Número da conta: ");
         int agencyCode = int.Parse(Console.ReadLine());
         Console.Write("Saldo inicial na conta: ");
         double balance = double.Parse(Console.ReadLine());
         
-        bytebank.Models.Account.CheckingAccount account = new bytebank.Models.Account.CheckingAccount(agencyCode, agencyName, client, accountCode, balance);
+        bytebank.Models.Account.CheckingAccount account = new bytebank.Models.Account.CheckingAccount(agencyCode, agencyName, client, balance);
 
         _accountList.Add(account);
         Console.WriteLine("             ----------------------------             ");
@@ -125,6 +128,111 @@ void RemoveAccount()
     }
 }
 
+void SortAccounts()
+{
+    Console.Clear();
+    Console.WriteLine("======================================================\n");
+    Console.WriteLine("             ----------------------------             ");
+    Console.WriteLine("=====        Ordenação da lista de contas        =====");
+    Console.WriteLine("             ----------------------------             ");
+
+    _accountList.Sort();
+    
+    Console.Clear();
+    
+    foreach(bytebank.Models.Account.CheckingAccount account in _accountList)
+    {
+        Console.WriteLine(account);
+    }
+
+    Console.WriteLine("              --------------------------              ");
+    Console.WriteLine("              Lista ordenada com sucesso              ");
+    Console.WriteLine("              --------------------------              ");
+    Console.WriteLine("======================================================\n");
+}
+
+bytebank.Models.Account.CheckingAccount SearchByCpf(string? cpf)
+{
+    // Count: método da List<T> que retorna um int com o tamanho atual do array.
+    for (int index = 0; index < _accountList.Count; ++ index)
+    {
+        // Equals: método da classe string que retorna true caso a string passada por parametro seja igual ao valor da instância, ou false caso qualquer outra coisa.
+        if (_accountList[index].Owner.Cpf.Equals(cpf)) return _accountList[index];
+    }
+
+    return null;
+}
+
+bytebank.Models.Account.CheckingAccount SearchByAccountCode(string? accountCode)
+{
+    for (int index = 0; index < _accountList.Count; ++ index)
+    {
+        if (_accountList[index].AccountCode.Equals(accountCode)) return _accountList[index];
+    }
+
+    return null;
+}
+
+void SearchAccount()
+{
+    Console.Clear();
+    Console.WriteLine("======================================================\n");
+    Console.WriteLine("                  ----------------                    ");
+    Console.WriteLine("=====             Pesquisar contas               =====");
+    Console.WriteLine("                  ----------------                    ");
+    Console.WriteLine("              Digite a opção desejada:                ");
+    Console.WriteLine("              (1) p/ pesquisa por CPF;                ");
+    Console.WriteLine("        (2) p/ pesquisa por NÚMERO DA CONTA.          ");
+    try
+    {
+        Console.Write("\nOpção: ");
+        int selectedOption = int.Parse(Console.ReadLine());
+
+            if (selectedOption == 1)
+            {
+                Console.Write("Digite o CPF do titular: ");
+                string ownerCpfToSearch = Console.ReadLine();
+
+                bytebank.Models.Account.CheckingAccount account = SearchByCpf(ownerCpfToSearch);
+
+                if (account != null)
+                {
+                    Console.WriteLine("\nDados da conta encontrada: ");
+                    Console.WriteLine(account);
+                    Console.WriteLine("======================================================\n");
+                }
+                else
+                {
+                    Console.WriteLine("\nNenhuma conta encontrada.");
+                }
+            }
+            else if (selectedOption == 2)
+            {
+                Console.Write("Digite o número da conta desejada: ");
+                string accountCodeToSearch = Console.ReadLine();
+
+                bytebank.Models.Account.CheckingAccount account = SearchByAccountCode(accountCodeToSearch);
+
+                if (account != null)
+                {
+                    Console.WriteLine("\nDados da conta encontrada: ");
+                    Console.WriteLine(account);
+                    Console.WriteLine("======================================================\n");
+                }
+                else
+                {
+                    Console.WriteLine("\nNenhuma conta encontrada.");
+                }
+            }
+    }
+    catch (System.Exception)
+    {
+        Console.WriteLine("                  ----------------                    ");
+        Console.WriteLine("                   Opção inválida                     ");
+        Console.WriteLine("                  ----------------                    ");
+    }
+}
+
 void CustomerService()
 {
     char option = '0';
@@ -169,8 +277,10 @@ void CustomerService()
                 RemoveAccount();
                 break;
             case '4':
+                SortAccounts();
                 break;
             case '5':
+                SearchAccount();
                 break;
             case '6':
                 return;
@@ -224,15 +334,15 @@ void genericListExamples()
 {
     List<bytebank.Models.Account.CheckingAccount> _accountList2 = new List<bytebank.Models.Account.CheckingAccount>()
     {
-        new bytebank.Models.Account.CheckingAccount(123, "Bytebank 1", new bytebank.Models.Account.Client("456", "Joao", "Dev"), "3211", 20),
-        new bytebank.Models.Account.CheckingAccount(231, "Bytebank 2", new bytebank.Models.Account.Client("563", "Pedro", "Zelador"), "2112", 50),
-        new bytebank.Models.Account.CheckingAccount(321, "Bytebank 3", new bytebank.Models.Account.Client("446", "Otavio", "Auxiliar"), "2312", 200.50),
+        new bytebank.Models.Account.CheckingAccount(123, "Bytebank 1", new bytebank.Models.Account.Client("456", "Joao", "Dev"), 20),
+        new bytebank.Models.Account.CheckingAccount(231, "Bytebank 2", new bytebank.Models.Account.Client("563", "Pedro", "Zelador"), 50),
+        new bytebank.Models.Account.CheckingAccount(321, "Bytebank 3", new bytebank.Models.Account.Client("446", "Otavio", "Auxiliar"), 200.50),
     };
     List<bytebank.Models.Account.CheckingAccount> _accountList3 = new List<bytebank.Models.Account.CheckingAccount>()
     {
-        new bytebank.Models.Account.CheckingAccount(14234, "Bytebank 4", new bytebank.Models.Account.Client("039578", "Anteteguemon", "Radialista"), "2571", 2198.46),
-        new bytebank.Models.Account.CheckingAccount(57346, "Bytebank 5", new bytebank.Models.Account.Client("204897", "Olaria", "Atleta"), "2938", 23.47),
-        new bytebank.Models.Account.CheckingAccount(21394, "Bytebank 6", new bytebank.Models.Account.Client("103954", "Maria", "Cozinheiro"), "9038", 1093.57),
+        new bytebank.Models.Account.CheckingAccount(14234, "Bytebank 4", new bytebank.Models.Account.Client("039578", "Anteteguemon", "Radialista"), 17198.46),
+        new bytebank.Models.Account.CheckingAccount(57346, "Bytebank 5", new bytebank.Models.Account.Client("204897", "Olaria", "Atleta"), 23.47),
+        new bytebank.Models.Account.CheckingAccount(21394, "Bytebank 6", new bytebank.Models.Account.Client("103954", "Maria", "Cozinheiro"), 1093.57),
     };
 
     // ADDLIST: método da classe List que adiciona ao fim do array os itens da lista passada por parametro.
@@ -267,16 +377,16 @@ void TestCheckingAccountList()
     bytebank.Models.Administrative.Utils.CheckingAccountList accountsList = new bytebank.Models.Administrative.Utils.CheckingAccountList();
 
     bytebank.Models.Account.Client carolina = new bytebank.Models.Account.Client("345.694.233-50", "Carolina da Silva", "Desenvolvedora");
-    bytebank.Models.Account.CheckingAccount carolinaAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", carolina, "6635-X", 583.25);
+    bytebank.Models.Account.CheckingAccount carolinaAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", carolina, 583.25);
 
     bytebank.Models.Account.Client lilian = new bytebank.Models.Account.Client("345.694.233-50", "Lilian Souza", "Cozinheira");
-    bytebank.Models.Account.CheckingAccount lilianAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", lilian, "6635-X", 16.48);
+    bytebank.Models.Account.CheckingAccount lilianAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", lilian, 16.48);
 
     bytebank.Models.Account.Client clovis = new bytebank.Models.Account.Client("345.694.233-50", "Clovis Machonici", "Taxista");
-    bytebank.Models.Account.CheckingAccount clovisAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", clovis, "6635-X", 1520.10);
+    bytebank.Models.Account.CheckingAccount clovisAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", clovis, 1520.10);
 
     bytebank.Models.Account.Client aline = new bytebank.Models.Account.Client("345.694.233-50", "Aline Moura", "Atriz");
-    bytebank.Models.Account.CheckingAccount alineAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", aline, "6635-X", 795.41);
+    bytebank.Models.Account.CheckingAccount alineAccount = new bytebank.Models.Account.CheckingAccount(0001, "Bytebank", aline, 795.41);
 
     accountsList.AddAccount(carolinaAccount);
     accountsList.AddAccount(lilianAccount);

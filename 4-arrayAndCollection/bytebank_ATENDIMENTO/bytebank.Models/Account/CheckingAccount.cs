@@ -1,6 +1,8 @@
 ﻿namespace bytebank.Models.Account
 {
-	public class CheckingAccount
+	// Para utilizar o método sorte, a classe precisa implementar o método CompareTo, da interface IComparable.
+	// OBS.: IComparable é uma classe genérica, sendo necessário passar para ela qual será o tipo a ser utilizado para realizar a comparação
+	public class CheckingAccount : IComparable<CheckingAccount>
 	{
 		private int _agencyCode;
 
@@ -100,7 +102,7 @@
 			return true;
 		}
 
-		public CheckingAccount(int agencyCode, string agencyName, bytebank.Models.Account.Client owner, string accountCode, double balance)
+		public CheckingAccount(int agencyCode, string agencyName, bytebank.Models.Account.Client owner, double balance)
 		{
 			AgencyName = agencyName;
 			_balance = balance;
@@ -121,6 +123,24 @@
 				   $"Profissão do Titular: {this.Owner.Occupation} \n" +
 				   $"Saldo atual: {this.Balance}";
 		}
-	}
+
+		/*
+			Método CompareTo: passar como parametro o mesmo tipo passado na atribuição da interface a classe
+			esse método espera retornar um int, e a partir desse retorno, realiza a ordenação na lista.
+				int < 0 =  A instância precede o parametro na ordem de comparação;
+				int 0 = Intância ocorre na mesma posição que o parametro na ordem de comparação;
+				int > 0 = A instância segue o valor o parametro na ordem de comparação;
+		*/
+		public int CompareTo(CheckingAccount? comparisionAccount)
+		{
+			if (comparisionAccount == null)
+			{
+				return 1;
+			}
+			else {
+				return this.AccountCode.CompareTo(comparisionAccount.AccountCode);
+			}
+		}
+    }
 
 }
