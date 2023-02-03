@@ -10,9 +10,15 @@ string fileAddress = "contas.txt";
     aos poucos, se caso contrário, ocuparia todo o espaço de memória e inviabilizaria outros processos rodando em segundo plano. Então, o arquivo é "dividido" em partes.
 
     FileStream aceita como primeiro parametro e endereço do arquivo e outras informações, como por exemplo o que será feito com esse arquivo.
+
+    APÓS o uso é NECESSÁRIO fechar (FileStream().Close) a conexão com o arquivo. Caso contrário, ele ficará travado para edição por outros programas enquanto a aplicação não for finalizadaa.
 */
 
 FileStream fs = new FileStream(fileAddress, FileMode.Open);
+
+/*
+    o byte consegue armazenar um valor entre 0 e 255.
+*/
 
 byte[] buffer = new byte[1024]; // 1024 = 1KB;
 
@@ -30,22 +36,30 @@ byte[] buffer = new byte[1024]; // 1024 = 1KB;
 // -1 é um valor que não irá interferir na sequência de bytes porque os bytes ou são maiores que zero, ou zero. -1 nunca será retornado pelo read.
 // essa variável será atualizada a cada vez que o Read for lido
 
-int numberOfBytesRead = fs.Read(buffer, 0, 1024); // Irá popular a List buffer antes do primeiro loop.
+int numberOfBytesRead = -1; // Irá popular a List buffer antes do primeiro loop.
 
 while(numberOfBytesRead != 0)
 {
-    numberOfBytesRead = fs.Read(buffer, 0, 1024);
     writeBuffer(buffer);
+    numberOfBytesRead = fs.Read(buffer, 0, 1024);
 }
 
 static void writeBuffer(byte[] buffer)
 {
+    System.Text.UTF8Encoding utf8 = new System.Text.UTF8Encoding();
+
+    // UTF8 = faz a decodificação de uma sequencia de bytes passada por parametro em uma string.
+    string text = utf8.GetString(buffer);
+
+    Console.Write(text);
+
+    /* IMPRIMINDO TODOS OS BYTES NO CONSOLE
     foreach(byte aByte in buffer)
     {
-        Console.Write(aByte + " ");
+        Console.Write(utf8.GetString(buffer) + " ");
     }
-
-    Console.WriteLine("\n" + buffer.Length);
+    */
 }
 
+fs.Close(); // Fecha a conexão com o arquivos p/ outros programas conseguirem modifica-lo.
 Console.ReadLine();
