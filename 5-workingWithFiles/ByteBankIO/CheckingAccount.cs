@@ -39,5 +39,15 @@
 
             Balance += value;
         }
+
+        public override string ToString()
+        {
+            // @$"" = string literal com multiplas linhas.
+            return @$"
+Nº da conta: {this.AccountCode}
+Nome da agência: {this.AgencyName}
+Saldo na conta: {this.Balance}
+Nome do cliente: {this.Owner.Name}";
+        }
     }
 }
