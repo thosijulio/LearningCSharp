@@ -12,7 +12,7 @@
 
         int agencyCode = int.Parse(values[0]);
         string ownerCpf = values[1];
-        double balance = double.Parse(values[2]);
+        double balance = double.Parse(values[2].Replace(".", ","));
         string ownerName = values[3];
 
         ByteBankIO.Client owner = new ByteBankIO.Client(ownerName, ownerCpf, "Dev");
