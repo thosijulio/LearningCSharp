@@ -4,7 +4,7 @@
     {
         Program.WorkingWithStreamReader();
         Console.Read();
-        Program.CreateFileWithWriter();
+        Program.CheckWrite();
     }
 
     static ByteBankIO.CheckingAccount ConvertStringToCheckingAccount(string textLine)
