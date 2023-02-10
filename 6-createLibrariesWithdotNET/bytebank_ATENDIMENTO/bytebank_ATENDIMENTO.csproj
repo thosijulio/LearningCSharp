@@ -9,21 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
-  <!-- Forma para adicionar referencia de outro projeto dentro do projeto atual.
-    Útil para separar melhor a aplicação, facilitando sua manutenção posteriormente,
+  <!--
+      Forma para adicionar referencia de outro projeto dentro do projeto atual.
+      Útil para separar melhor a aplicação, facilitando sua manutenção posteriormente,
     além de poder compartilhar uma parte menor da aplicação para outras soluções.
   -->
   <ItemGroup>
     <ProjectReference Include="..\bytebank_Modelos\bytebank_Modelos.csproj" />
   </ItemGroup>
-
-
-
-
-
-
   
 </Project>
