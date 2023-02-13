@@ -94,23 +94,30 @@ namespace bytebank_ATENDIMENTO.bytebank.Atendimento
             }
             else
             {
+                /*
+                    Utilização de biblioteca externa para criação de arquivos json
+                */
                 string json = JsonConvert.SerializeObject(_listaDeContas,
                     Formatting.Indented);
                 try
                 {
-                    FileStream fs = new FileStream(@"c:\tmp\export\contas.json", 
-                        FileMode.Create);
+                    /*
+                        Deixar sempre leitura/escrita de arquivo em um bloco try-catch,
+                        assim a aplicação não quebra por completo caso dê algum erro durante a operação,
+                        exemplo: rota p/ o arquivo inválida. O programa entra no catch, executa algum console, e segue seu fluxo.
+                    */
+                    FileStream fs = new FileStream(@"c:\tmp\export\contas.json", FileMode.Create);
                     using (StreamWriter streamwriter = new StreamWriter(fs))
                     {
                         streamwriter.WriteLine(json);
                     }
+
                     Console.WriteLine(@"Arquivo salvo em c:\tmp\export\");
                     Console.ReadKey();
                 }
                 catch (Exception excecao)
                 {
                     throw new ByteBankException(excecao.Message);
-                    Console.ReadKey();
                 }
             }
         }
