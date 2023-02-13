@@ -3,7 +3,7 @@ namespace bytebank.Modelos.ADM.Funcionarios
 {
     public class Diretor : FuncionarioAutenticavel
     {
-        public Diretor(string cpf) : base(5000, cpf)
+        public Diretor(string cpf, string password) : base(5000, cpf, password)
         {
             Console.WriteLine("Criando DIRETOR");
         }

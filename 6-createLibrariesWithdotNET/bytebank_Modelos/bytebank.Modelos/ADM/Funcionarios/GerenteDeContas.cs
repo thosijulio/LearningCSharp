@@ -3,7 +3,7 @@ namespace bytebank.Modelos.ADM.Funcionarios
 {
     public class GerenteDeConta : FuncionarioAutenticavel
     {
-        public GerenteDeConta(string cpf) : base(4000, cpf)
+        public GerenteDeConta(string cpf, string password) : base(4000, cpf, password)
         {
         }
 

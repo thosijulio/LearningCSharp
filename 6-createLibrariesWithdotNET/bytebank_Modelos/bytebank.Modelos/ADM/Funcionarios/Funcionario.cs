@@ -20,6 +20,14 @@ namespace bytebank.Modelos.ADM.Funcionarios
         }
 
         public abstract void AumentarSalario();
-        public abstract double getBonificacao();
+
+        /*
+            A combinação protected internal é um modificador de acesso de membro. Um membro com esse modificador é acessível
+            no assembly atual ou nos tipos que derivam da classe recipiente.
+            Neste exemplo, é possível criar dentro de bytebank_ATENDIMENTO > Program.cs uma classe "Estagiário", que herda de funcionário
+            e utilizar o método getBonificação, algo que não seria possível se tivesse marcado apenas como "internal".
+            Doc.: https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/keywords/accessibility-levels
+        */
+        protected internal abstract double getBonificacao();
     }
 }
