@@ -3,6 +3,8 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 new ByteBankAtendimento().AtendimentoCliente();
 
 
+Console.WriteLine(GeradorChavePix.GetChavePix());
+
 public class Estagiario : bytebank.Modelos.ADM.Funcionarios.Funcionario
 {
     public Estagiario(double salario, string cpf) : base(salario, cpf)

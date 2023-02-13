@@ -19,6 +19,7 @@
   -->
   <ItemGroup>
     <ProjectReference Include="..\bytebank_Modelos\bytebank_Modelos.csproj" />
+    <ProjectReference Include="..\bytebank_GeradorChavePix\bytebank_GeradorChavePix.csproj" />
   </ItemGroup>
   
 </Project>
